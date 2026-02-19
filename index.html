@@ -281,79 +281,52 @@
       line-height: 1.5;
     }
 
-    /* ── Video carousel ───────────────────────────────────────── */
-    .carousel-wrap {
-      position: relative;
-      overflow: hidden;
-      border-radius: var(--radius);
-      box-shadow: 0 4px 24px rgba(0,0,0,.1);
-    }
-    .carousel-track {
-      display: flex;
-      transition: transform .45s cubic-bezier(.25,.46,.45,.94);
-    }
-    .carousel-slide {
-      min-width: 100%;
-      background: #000;
-    }
-    .carousel-slide video,
-    .carousel-slide img {
-      width: 100%;
-      display: block;
-    }
-    .carousel-slide .slide-placeholder {
-      aspect-ratio: 16/9;
+    /* ── Videos grid ───────────────────────────────────────── */
+    .videos-grid {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #1e1b4b, #312e81);
-      color: rgba(255,255,255,.5);
+      gap: 48px;
     }
-    .carousel-slide .slide-placeholder i { font-size: 3rem; margin-bottom: 10px; }
-
-    .carousel-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(255,255,255,.9);
-      border: none;
-      border-radius: 50%;
-      width: 44px; height: 44px;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
-      font-size: 1rem;
+    .video-pair h3 {
+      font-family: 'Source Serif 4', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 20px;
       color: var(--text);
-      box-shadow: 0 2px 12px rgba(0,0,0,.2);
-      transition: background .2s, transform .2s;
-      z-index: 2;
     }
-    .carousel-btn:hover { background: #fff; transform: translateY(-50%) scale(1.05); }
-    .carousel-btn--prev { left: 12px; }
-    .carousel-btn--next { right: 12px; }
-
-    .carousel-dots {
+    .video-row {
       display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 16px;
+      gap: 16px;
+      margin-bottom: 16px;
+      align-items: flex-start;
     }
-    .carousel-dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--border);
-      border: none;
-      cursor: pointer;
-      transition: background .2s, transform .2s;
+    .video-row:last-child {
+      margin-bottom: 0;
     }
-    .carousel-dot.active { background: var(--accent); transform: scale(1.3); }
-
-    .slide-caption {
-      text-align: center;
-      margin-top: 12px;
-      font-size: .9rem;
-      color: var(--muted);
-      min-height: 1.5em;
+    .video-item {
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: #000;
+      box-shadow: 0 4px 12px rgba(0,0,0,.15);
+    }
+    .video-item:first-child {
+      flex: 1;
+    }
+    .video-item:last-child {
+      max-width: 25%;
+      flex-shrink: 0;
+      margin-left: auto;
+    }
+    .video-item video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+    @media (max-width: 768px) {
+      .video-row {
+        grid-template-columns: 1fr;
+      }
     }
 
     /* ── Results gallery  ─────────────────────────────────────── */
@@ -547,54 +520,67 @@
   <div class="container">
     <h2 class="section-title">Results Videos</h2>
 
-    <div class="carousel-wrap" id="carousel">
-      <div class="carousel-track" id="carouselTrack">
-
-        <!-- Slide 1 -->
-        <div class="carousel-slide">
-          <!--
-            <video src="assets/result1.mp4" autoplay muted loop playsinline></video>
-          -->
-          <div class="slide-placeholder">
-            <i class="fas fa-video"></i>
-            Demo 1 — replace with video
+    <div class="videos-grid">
+      <!-- Rope -->
+      <div class="video-pair">
+        <h3>Rope</h3>
+        <div class="video-row">
+          <div class="video-item">
+            <video src="assets/videos/rope/rope_1.mp4" autoplay muted loop playsinline controls></video>
+          </div>
+          <div class="video-item">
+            <video src="assets/videos/rope/rope_1_pcl.mp4" autoplay muted loop playsinline controls></video>
           </div>
         </div>
+      </div>
 
-        <!-- Slide 2 -->
-        <div class="carousel-slide">
-          <!--
-            <video src="assets/result2.mp4" autoplay muted loop playsinline></video>
-          -->
-          <div class="slide-placeholder">
-            <i class="fas fa-video"></i>
-            Demo 2 — replace with video
+      <!-- Single -->
+      <div class="video-pair">
+        <h3>Single</h3>
+        <div class="video-row">
+          <div class="video-item">
+            <video src="assets/videos/single/rubiks.mp4" autoplay muted loop playsinline controls></video>
+          </div>
+          <div class="video-item">
+            <video src="assets/videos/single/rubiks_pcl.mp4" autoplay muted loop playsinline controls></video>
           </div>
         </div>
-
-        <!-- Slide 3 -->
-        <div class="carousel-slide">
-          <!--
-            <video src="assets/result3.mp4" autoplay muted loop playsinline></video>
-          -->
-          <div class="slide-placeholder">
-            <i class="fas fa-video"></i>
-            Demo 3 — replace with video
+        <div class="video-row">
+          <div class="video-item">
+            <video src="assets/videos/single/t_shape.mp4" autoplay muted loop playsinline controls></video>
+          </div>
+          <div class="video-item">
+            <video src="assets/videos/single/t_shape_pcl.mp4" autoplay muted loop playsinline controls></video>
           </div>
         </div>
+      </div>
 
-      </div><!-- /.carousel-track -->
+      <!-- Pushover -->
+      <div class="video-pair">
+        <h3>Pushover</h3>
+        <div class="video-row">
+          <div class="video-item">
+            <video src="assets/videos/pushover/pushover_1.mp4" autoplay muted loop playsinline controls></video>
+          </div>
+          <div class="video-item">
+            <video src="assets/videos/pushover/pushover_1_pcl.mp4" autoplay muted loop playsinline controls></video>
+          </div>
+        </div>
+      </div>
 
-      <button class="carousel-btn carousel-btn--prev" id="prevBtn" aria-label="Previous slide">
-        <i class="fas fa-chevron-left"></i>
-      </button>
-      <button class="carousel-btn carousel-btn--next" id="nextBtn" aria-label="Next slide">
-        <i class="fas fa-chevron-right"></i>
-      </button>
-    </div><!-- /.carousel-wrap -->
-
-    <div class="carousel-dots" id="carouselDots"></div>
-    <p class="slide-caption" id="slideCaption"></p>
+      <!-- Double -->
+      <div class="video-pair">
+        <h3>Double</h3>
+        <div class="video-row">
+          <div class="video-item">
+            <video src="assets/videos/double/mug_rubiks.mp4" autoplay muted loop playsinline controls></video>
+          </div>
+          <div class="video-item">
+            <video src="assets/videos/double/mug_rubiks_pcl.mp4" autoplay muted loop playsinline controls></video>
+          </div>
+        </div>
+      </div>
+    </div><!-- /.videos-grid -->
 
   </div>
 </section>
@@ -711,62 +697,7 @@
      SCRIPTS
 ════════════════════════════════════════════════════════════ -->
 <script>
-  /* ── Carousel ─────────────────────────────────────────────── */
-  (function () {
-    const track  = document.getElementById('carouselTrack');
-    const slides = track.querySelectorAll('.carousel-slide');
-    const dotsEl = document.getElementById('carouselDots');
-    const caption = document.getElementById('slideCaption');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-
-    const captions = [
-      'Demo 1: Real-time visual alignment during pick-and-place.',
-      'Demo 2: In-hand rotation with online Gaussian correction.',
-      'Demo 3: Multi-object tracking in a cluttered workspace.',
-    ];
-
-    let current = 0;
-
-    // Build dots
-    slides.forEach((_, i) => {
-      const dot = document.createElement('button');
-      dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-      dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
-      dot.addEventListener('click', () => goTo(i));
-      dotsEl.appendChild(dot);
-    });
-
-    function goTo(idx) {
-      slides[current].querySelector('video')?.pause();
-      current = (idx + slides.length) % slides.length;
-      track.style.transform = `translateX(-${current * 100}%)`;
-      dotsEl.querySelectorAll('.carousel-dot').forEach((d, i) =>
-        d.classList.toggle('active', i === current));
-      caption.textContent = captions[current] || '';
-      slides[current].querySelector('video')?.play();
-    }
-
-    prevBtn.addEventListener('click', () => goTo(current - 1));
-    nextBtn.addEventListener('click', () => goTo(current + 1));
-
-    // Keyboard navigation
-    document.addEventListener('keydown', e => {
-      if (e.key === 'ArrowLeft')  goTo(current - 1);
-      if (e.key === 'ArrowRight') goTo(current + 1);
-    });
-
-    // Auto-advance every 6 s (pauses on hover)
-    let timer = setInterval(() => goTo(current + 1), 6000);
-    const wrap = document.getElementById('carousel');
-    wrap.addEventListener('mouseenter', () => clearInterval(timer));
-    wrap.addEventListener('mouseleave', () => {
-      timer = setInterval(() => goTo(current + 1), 6000);
-    });
-
-    // Init caption
-    caption.textContent = captions[0] || '';
-  })();
+  /* ── Carousel (removed - replaced with video grid) ─────────── */
 
   /* ── Teaser custom player ──────────────────────────────────── */
   (function () {
