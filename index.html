@@ -360,6 +360,65 @@
     .result-card .card-title { font-weight: 600; font-size: .95rem; margin-bottom: 4px; }
     .result-card .card-desc  { font-size: .83rem; color: var(--muted); line-height: 1.5; }
 
+    /* ── Video modal/lightbox ────────────────────────────────── */
+    .video-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,.88);
+      align-items: center;
+      justify-content: center;
+    }
+    .video-modal-overlay.active { display: flex; }
+    .video-modal-inner {
+      position: relative;
+      width: min(90vw, 1200px);
+      max-height: 90vh;
+    }
+    .video-modal-inner video {
+      width: 100%;
+      max-height: 90vh;
+      border-radius: var(--radius);
+      display: block;
+    }
+    .video-modal-close {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.5rem;
+      cursor: pointer;
+      line-height: 1;
+      padding: 4px 8px;
+      opacity: .8;
+      transition: opacity .15s;
+    }
+    .video-modal-close:hover { opacity: 1; }
+
+    /* ── Expand overlay button on grid videos ─────────────────── */
+    .video-item { position: relative; }
+    .video-expand-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: rgba(0,0,0,.55);
+      border: none;
+      color: #fff;
+      border-radius: 6px;
+      padding: 5px 9px;
+      font-size: .85rem;
+      cursor: pointer;
+      z-index: 5;
+      opacity: 0;
+      transition: opacity .2s, background .15s;
+      line-height: 1;
+    }
+    .video-item:hover .video-expand-btn { opacity: 1; }
+    .video-expand-btn:hover { background: rgba(0,0,0,.8); }
+
     /* ── BibTeX ───────────────────────────────────────────────── */
     .bibtex-block {
       position: relative;
@@ -526,10 +585,10 @@
         <h3>Rope</h3>
         <div class="video-row">
           <div class="video-item">
-            <video src="assets/videos/rope/rope_1.mp4" autoplay muted loop playsinline controls></video>
+            <video src="assets/videos/rope/rope_1.mp4" autoplay muted loop playsinline controls controlslist="nofullscreen"></video>
           </div>
           <div class="video-item">
-            <video src="assets/videos/rope/rope_1_pcl.mp4" autoplay muted loop playsinline controls></video>
+            <video src="assets/videos/rope/rope_1_pcl.mp4" autoplay muted loop playsinline controls controlslist="nofullscreen"></video>
           </div>
         </div>
       </div>
@@ -539,18 +598,18 @@
         <h3>Single</h3>
         <div class="video-row">
           <div class="video-item">
-            <video src="assets/videos/single/rubiks.mp4" autoplay muted loop playsinline controls></video>
+            <video src="assets/videos/single/rubiks.mp4" autoplay muted loop playsinline controls controlslist="nofullscreen"></video>
           </div>
           <div class="video-item">
-            <video src="assets/videos/single/rubiks_pcl.mp4" autoplay muted loop playsinline controls></video>
+            <video src="assets/videos/single/rubiks_pcl.mp4" autoplay muted loop playsinline controls controlslist="nofullscreen"></video>
           </div>
         </div>
         <div class="video-row">
           <div class="video-item">
-            <video src="assets/videos/single/t_shape.mp4" autoplay muted loop playsinline controls></video>
+            <video src="assets/videos/single/t_shape.mp4" autoplay muted loop playsinline controls controlslist="nofullscreen"></video>
           </div>
           <div class="video-item">
-            <video src="assets/videos/single/t_shape_pcl.mp4" autoplay muted loop playsinline controls></video>
+            <video src="assets/videos/single/t_shape_pcl.mp4" autoplay muted loop playsinline controls controlslist="nofullscreen"></video>
           </div>
         </div>
       </div>
@@ -560,10 +619,10 @@
         <h3>Pushover</h3>
         <div class="video-row">
           <div class="video-item">
-            <video src="assets/videos/pushover/pushover_1.mp4" autoplay muted loop playsinline controls></video>
+            <video src="assets/videos/pushover/pushover_1.mp4" autoplay muted loop playsinline controls controlslist="nofullscreen"></video>
           </div>
           <div class="video-item">
-            <video src="assets/videos/pushover/pushover_1_pcl.mp4" autoplay muted loop playsinline controls></video>
+            <video src="assets/videos/pushover/pushover_1_pcl.mp4" autoplay muted loop playsinline controls controlslist="nofullscreen"></video>
           </div>
         </div>
       </div>
@@ -573,10 +632,10 @@
         <h3>Double</h3>
         <div class="video-row">
           <div class="video-item">
-            <video src="assets/videos/double/mug_rubiks.mp4" autoplay muted loop playsinline controls></video>
+            <video src="assets/videos/double/mug_rubiks.mp4" autoplay muted loop playsinline controls controlslist="nofullscreen"></video>
           </div>
           <div class="video-item">
-            <video src="assets/videos/double/mug_rubiks_pcl.mp4" autoplay muted loop playsinline controls></video>
+            <video src="assets/videos/double/mug_rubiks_pcl.mp4" autoplay muted loop playsinline controls controlslist="nofullscreen"></video>
           </div>
         </div>
       </div>
@@ -693,6 +752,14 @@
 </footer>
 
 
+<!-- ── Video modal overlay ───────────────────────────────────── -->
+<div class="video-modal-overlay" id="videoModal" role="dialog" aria-modal="true" aria-label="Enlarged video">
+  <div class="video-modal-inner">
+    <button class="video-modal-close" id="videoModalClose" aria-label="Close"><i class="fas fa-times"></i></button>
+    <video id="videoModalVideo" controls muted playsinline></video>
+  </div>
+</div>
+
 <!-- ═══════════════════════════════════════════════════════════
      SCRIPTS
 ════════════════════════════════════════════════════════════ -->
@@ -781,6 +848,48 @@
     });
 
     video.play().catch(() => {});
+  })();
+
+  /* ── Video modal / enlarge ────────────────────────────────── */
+  (function () {
+    const modal      = document.getElementById('videoModal');
+    const modalVideo = document.getElementById('videoModalVideo');
+    const closeBtn   = document.getElementById('videoModalClose');
+
+    // Inject an expand button into every grid video-item
+    document.querySelectorAll('.video-item').forEach(item => {
+      const vid = item.querySelector('video');
+      if (!vid) return;
+      const btn = document.createElement('button');
+      btn.className = 'video-expand-btn';
+      btn.innerHTML = '<i class="fas fa-expand"></i>';
+      btn.setAttribute('aria-label', 'Enlarge video');
+      item.appendChild(btn);
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        openModal(vid.src, vid.currentTime);
+      });
+    });
+
+    function openModal(src, startTime) {
+      modalVideo.src = src;
+      modal.classList.add('active');
+      modalVideo.addEventListener('loadedmetadata', function onMeta() {
+        modalVideo.currentTime = startTime || 0;
+        modalVideo.play().catch(() => {});
+        modalVideo.removeEventListener('loadedmetadata', onMeta);
+      });
+    }
+
+    function closeModal() {
+      modal.classList.remove('active');
+      modalVideo.pause();
+      modalVideo.src = '';
+    }
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
   })();
 
   /* ── Copy BibTeX ──────────────────────────────────────────── */
