@@ -313,6 +313,7 @@
       flex: 1;
     }
     .video-item:last-child {
+      width: 25%;
       max-width: 25%;
       flex-shrink: 0;
       margin-left: auto;
@@ -873,21 +874,43 @@
 
   /* ── Sync right video height to left video height ─────────── */
   (function () {
-    function syncVideoRowHeights() {
-      document.querySelectorAll('.video-row').forEach(row => {
-        const left  = row.querySelector('.video-item:first-child');
-        const right = row.querySelector('.video-item:last-child');
-        if (!left || !right || left === right) return;
-        right.style.height = left.offsetHeight + 'px';
+    function getItemHeight(item) {
+      // Prefer computing height from the video's intrinsic AR × rendered width,
+      // which is available right after loadedmetadata without waiting for reflow.
+      const vid = item.querySelector('video');
+      if (vid && vid.videoWidth && vid.videoHeight) {
+        const w = item.getBoundingClientRect().width;
+        return w * vid.videoHeight / vid.videoWidth;
+      }
+      return item.getBoundingClientRect().height;
+    }
+
+    function syncPair(pair) {
+      let refHeight = 0;
+      pair.querySelectorAll('.video-row').forEach(row => {
+        const left = row.querySelector('.video-item:first-child');
+        if (left) refHeight = Math.max(refHeight, getItemHeight(left));
+      });
+      if (!refHeight) return;
+      pair.querySelectorAll('.video-row').forEach(row => {
+        const items = row.querySelectorAll('.video-item');
+        if (items.length >= 2) items[items.length - 1].style.height = refHeight + 'px';
       });
     }
-    // Run after all videos have their dimensions
-    window.addEventListener('load', syncVideoRowHeights);
-    window.addEventListener('resize', syncVideoRowHeights);
-    // Also re-sync when any grid video metadata loads (dimensions become known)
-    document.querySelectorAll('.video-row video').forEach(v => {
-      v.addEventListener('loadedmetadata', syncVideoRowHeights);
+
+    function syncAll() {
+      document.querySelectorAll('.video-pair').forEach(pair => syncPair(pair));
+    }
+
+    // Re-sync whenever a left video's metadata loads (intrinsic AR becomes known)
+    document.querySelectorAll('.video-row .video-item:first-child video').forEach(v => {
+      v.addEventListener('loadedmetadata', function () {
+        syncPair(this.closest('.video-pair'));
+      });
     });
+
+    window.addEventListener('load', syncAll);
+    window.addEventListener('resize', syncAll);
   })();
 
   /* ── Copy BibTeX ──────────────────────────────────────────── */
