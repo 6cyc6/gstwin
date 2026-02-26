@@ -871,6 +871,25 @@
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
   })();
 
+  /* ── Sync right video height to left video height ─────────── */
+  (function () {
+    function syncVideoRowHeights() {
+      document.querySelectorAll('.video-row').forEach(row => {
+        const left  = row.querySelector('.video-item:first-child');
+        const right = row.querySelector('.video-item:last-child');
+        if (!left || !right || left === right) return;
+        right.style.height = left.offsetHeight + 'px';
+      });
+    }
+    // Run after all videos have their dimensions
+    window.addEventListener('load', syncVideoRowHeights);
+    window.addEventListener('resize', syncVideoRowHeights);
+    // Also re-sync when any grid video metadata loads (dimensions become known)
+    document.querySelectorAll('.video-row video').forEach(v => {
+      v.addEventListener('loadedmetadata', syncVideoRowHeights);
+    });
+  })();
+
   /* ── Copy BibTeX ──────────────────────────────────────────── */
   document.getElementById('copyBibBtn').addEventListener('click', function () {
     const text = document.getElementById('bibtexContent').textContent;
