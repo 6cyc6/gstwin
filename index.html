@@ -109,6 +109,41 @@
       margin-bottom: 36px;
     }
 
+    /* ── Institution logos ─────────────────────────────────── */
+    .inst-logos {
+      display: flex;
+      flex-wrap: nowrap;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      margin: 28px auto 36px;
+      width: fit-content;
+      max-width: 100%;
+      background: rgba(255,255,255,0.96);
+      border-radius: 14px;
+      padding: 14px 32px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.18);
+    }
+    .inst-logos a {
+      display: flex;
+      align-items: center;
+      opacity: 0.9;
+      transition: opacity .2s, transform .15s;
+    }
+    .inst-logos a:hover { opacity: 1; transform: translateY(-2px); }
+    .inst-logos a:first-child { margin-left: 16px; }
+    .inst-logos img {
+      height: 2.5em;
+      width: auto;
+      display: block;
+    }
+    .inst-logos img.logo-tud     { height: 3em; }
+    .inst-logos img.logo-dfki    { height: 2.2em; }
+    .inst-logos img.logo-hessian { height: 2.1em; }
+    .inst-logos img.logo-rig     { height: 2.7em; }
+    .inst-logos img.logo-naver   { height: 2em; }
+
     /* Link buttons */
     .link-buttons {
       display: flex;
@@ -493,6 +528,29 @@
       <sup>4</sup>Robotics Institute Germany (RIG)&nbsp;&nbsp;
       <sup>5</sup>NAVER LABS Europe
     </p>
+
+    <div style="text-align:center">
+    <div class="inst-logos">
+      <a href="https://www.ias.informatik.tu-darmstadt.de/" target="_blank" rel="noopener">
+        <img src="assets/imgs/IAS_vectorized.svg" alt="IAS – Intelligent Autonomous Systems">
+      </a>
+      <a href="https://www.tu-darmstadt.de/" target="_blank" rel="noopener">
+        <img src="assets/imgs/tud_logo.svg" alt="TU Darmstadt" class="logo-tud">
+      </a>
+      <a href="https://www.dfki.de/" target="_blank" rel="noopener">
+        <img src="assets/imgs/DFKI.svg" alt="DFKI" class="logo-dfki">
+      </a>
+      <a href="https://hessian.ai/" target="_blank" rel="noopener">
+        <img src="assets/imgs/hessian_ai.svg" alt="Hessian.AI" class="logo-hessian">
+      </a>
+      <a href="https://europe.naverlabs.com/" target="_blank" rel="noopener">
+        <img src="assets/imgs/naver_labs.png" alt="NAVER LABS Europe" class="logo-naver">
+      </a>
+      <a href="https://robotics-institute-germany.de/" target="_blank" rel="noopener">
+        <img src="assets/imgs/rig_logo.svg" alt="Robotics Institute Germany" class="logo-rig">
+      </a>
+    </div>
+    </div>
 
     <div class="link-buttons">
       <a href="#" class="btn btn--primary"><i class="fas fa-file-pdf"></i> Paper</a>

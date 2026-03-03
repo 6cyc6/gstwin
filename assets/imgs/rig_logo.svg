@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="130" height="56" viewBox="0 0 130 56" fill="none">
+  <!-- Supersign icon in dark navy -->
+  <g transform="translate(0, 13) scale(1.0)">
+    <path d="M29.9191 14.3746C21.0914 14.3483 16.125 10.0314 16.125 0.5L13.875 0.5L13.875 9.6877C13.875 12.5835 12.6934 14.3696 9.01981 14.3746L0 14.3746L0 16.6254H9.01981C12.6934 16.6304 13.875 18.4165 13.875 21.3123L13.875 30.5L16.125 30.5C16.125 20.9686 21.0914 16.6517 29.9191 16.6254H30L30 14.3746H29.9191Z" fill="#1B1F3B"/>
+  </g>
+  <!-- Text: 3 lines in dark navy -->
+  <text x="40" y="17" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#1B1F3B" letter-spacing="0.3">Robotics</text>
+  <text x="40" y="31" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#1B1F3B" letter-spacing="0.3">Institute</text>
+  <text x="40" y="45" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#1B1F3B" letter-spacing="0.3">Germany</text>
+</svg>
